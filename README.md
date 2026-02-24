@@ -5,8 +5,8 @@
       <img alt="teable logo" height="150" src="static/assets/images/teable-vertical-light.png">
     </picture>
   </h1>
-  <h3 align="center"><strong>Manage Your Data & Connect Your Team</strong></h3>
-  <p>Teable uses a simple, spreadsheet-like interface to create powerful database applications. Collaborate with your team in real-time, and scale to millions of rows
+  <h3 align="center"><strong>Teable AI: Manage Your Data & Connect Your Team</strong></h3>
+  <p>Teable AI uses a simple, spreadsheet-like interface to create powerful database applications enhanced with AI capabilities. Collaborate with your team in real-time, and scale to millions of rows.</p>
   <p>Try out Teable using our hosted version at <a href="https://teable.io">teable.io</a></p>
 </div>
 
@@ -19,26 +19,11 @@
 </p>
 
 <p align="center">
-  <a aria-label="Build" href="https://github.com/teableio/teable/actions?query=Build%20and%20Push%20to%20Docker%20Registry">
-    <img alt="build" src="https://img.shields.io/github/actions/workflow/status/teableio/teable/docker-push.yml?label=Build&logo=github&style=flat-quare&labelColor=000000" />
+  <a aria-label="Build" href="https://github.com/himanshu201031/teable-ai/actions">
+    <img alt="build" src="https://img.shields.io/github/actions/workflow/status/himanshu201031/teable-ai/docker-push.yml?label=Build&logo=github&style=flat-quare&labelColor=000000" />
   </a>
-  <a aria-label="Codefactor grade" href="https://www.codefactor.io/repository/github/teableio/teable">
-    <img alt="Codefactor" src="https://img.shields.io/codefactor/grade/github/teableio/teable?label=Codefactor&logo=codefactor&style=flat-quare&labelColor=000000" />
-  </a>
-  <a aria-label="Coverage Status" href="https://coveralls.io/github/teableio/teable?branch=develop">
-    <img alt="Coverage" src="https://coveralls.io/repos/github/teableio/teable/badge.svg?branch=develop" />
-  </a>
-  <a aria-label="CodeClimate technical debt" href="https://codeclimate.com/github/teableio/teable">
-    <img alt="Techdebt" src="https://img.shields.io/codeclimate/tech-debt/teableio/teable?label=TechDebt&logo=code-climate&style=flat-quare&labelColor=000000" />
-  </a>
-  <a aria-label="Codacy grade" href="https://www.codacy.com/gh/teableio/teable/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=teableio/teable&amp;utm_campaign=Badge_Grade">
-    <img alt="Codacy grade" src="https://img.shields.io/codacy/grade/dff9c944af284a0fad4e165eb1727467?logo=codacy&style=flat-square&labelColor=000&label=Codacy">
-  </a>
-  <a aria-label="Top language" href="https://github.com/teableio/teable/search?l=typescript">
-    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/teableio/teable?style=flat-square&labelColor=000&color=blue">
-  </a>
-  <a aria-label="Gurubase" href="https://gurubase.io/g/teable">
-    <img alt="Gurubase" src="https://img.shields.io/badge/Gurubase-Ask%20Teable%20Guru-006BFF" />
+  <a aria-label="Top language" href="https://github.com/himanshu201031/teable-ai/search?l=typescript">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/himanshu201031/teable-ai?style=flat-square&labelColor=000&color=blue" />
   </a>
 </p>
   <h1 align="center">
@@ -121,7 +106,7 @@ More features coming soon, see our <a target="_blank" href="https://app.teable.i
 
 # Structure
 
-[![Open in Gitpod](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/teableio/teable)
+[![Open in Gitpod](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/himanshu201031/teable-ai)
 
 ```
 .
