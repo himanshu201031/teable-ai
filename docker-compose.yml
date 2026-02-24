@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: teable-postgres
+    environment:
+      POSTGRES_USER: teable
+      POSTGRES_PASSWORD: teable
+      POSTGRES_DB: teable
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: teable-redis
+    ports:
+      - "6379:6379"
+
+  teable:
+    build:
+      context: .
+      dockerfile: dockers/teable/Dockerfile
+    container_name: teable-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      DATABASE_URL: postgres://teable:teable@postgres:5432/teable
+      PRISMA_DATABASE_URL: postgres://teable:teable@postgres:5432/teable
+      PUBLIC_ORIGIN: http://localhost:3000
+      REDIS_HOST: redis
+      BACKEND_CACHE_PROVIDER: redis
+      BACKEND_CACHE_REDIS_URI: redis://redis:6379
+      SECRET_KEY: teable_secret_key
+
+volumes:
+  postgres_data:

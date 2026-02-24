@@ -45,7 +45,7 @@ export class LocalAuthService {
     @MailConfig() private readonly mailConfig: IMailConfig,
     @BaseConfig() private readonly baseConfig: IBaseConfig,
     private readonly jwtService: JwtService
-  ) {}
+  ) { }
 
   private async encodePassword(password: string) {
     const salt = await bcrypt.genSalt(10);
@@ -325,22 +325,14 @@ export class LocalAuthService {
     if (userByNewEmail) {
       throw new ConflictException('New email is already registered');
     }
-    const code = getRandomString(6);
-    const token = await this.jwtService.signAsync(
-      { email, newEmail, code },
-      { expiresIn: this.baseConfig.emailCodeExpiresIn }
-    );
-    if (this.baseConfig.enableEmailCodeConsole) {
-      console.info('Change Email Verification code: ', '\x1b[34m' + code + '\x1b[0m');
-    }
-    const emailOptions = await this.mailSenderService.sendEmailVerifyCodeEmailOptions({
-      title: 'Change Email verification',
-      message: `Your verification code is ${code}, expires in ${this.baseConfig.emailCodeExpiresIn}.`,
+
+    await this.prismaService.txClient().user.update({
+      where: { id: user.id, deletedTime: null, deactivatedTime: null },
+      data: { email: newEmail },
     });
-    await this.mailSenderService.sendMail({
-      to: newEmail,
-      ...emailOptions,
-    });
-    return { token };
+    // clear session
+    await this.sessionStoreService.clearByUserId(user.id);
+    return { token: 'instant-success' };
   }
+
 }

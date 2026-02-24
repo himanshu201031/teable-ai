@@ -45,13 +45,13 @@ export function ChangeEmailDialog({ children }: { children: React.ReactNode }) {
         }
         return sendChangeEmailCode(ro);
       },
-      onSuccess: (data) => {
-        setToken(data.data.token);
-        setSendSuccess(true);
+      onSuccess: () => {
+        toast.success(t('settings.account.changeEmail.success.title'), {
+          description: t('settings.account.changeEmail.success.desc'),
+        });
         setTimeout(() => {
-          setSendSuccess(false);
+          router.reload();
         }, 2000);
-        toast.success(t('settings.account.changeEmail.success.sendSuccess'));
       },
       meta: {
         preventGlobalError: true,
@@ -66,32 +66,6 @@ export function ChangeEmailDialog({ children }: { children: React.ReactNode }) {
         }
       },
     });
-
-  const {
-    mutate: changeEmailMutation,
-    isLoading: changeEmailLoading,
-    isSuccess,
-  } = useMutation({
-    mutationFn: changeEmail,
-    onSuccess: () => {
-      toast.success(t('settings.account.changeEmail.success.title'), {
-        description: t('settings.account.changeEmail.success.desc'),
-      });
-      setTimeout(() => {
-        router.reload();
-      }, 2000);
-    },
-    meta: {
-      preventGlobalError: true,
-    },
-    onError: (error: HttpError) => {
-      if (error.code === HttpErrorCode.INVALID_CAPTCHA) {
-        setError(t('settings.account.changeEmail.error.invalidCode'));
-      } else {
-        setError(error.message);
-      }
-    },
-  });
 
   return (
     <Dialog>
@@ -133,45 +107,19 @@ export function ChangeEmailDialog({ children }: { children: React.ReactNode }) {
               onChange={(e) => setNewEmail(e.target.value)}
             />
           </div>
-          <div className="space-y-1">
-            <div className="flex items-center justify-between gap-2">
-              <Label className="text-xs text-muted-foreground" htmlFor="code">
-                {t('settings.account.changeEmail.code')}
-              </Label>
-              <Button
-                size={'sm'}
-                variant={'outline'}
-                onClick={() =>
-                  !sendSuccess &&
-                  sendChangeEmailCodeMutation({ email: newEmail, password: currentPassword })
-                }
-                disabled={sendChangeEmailCodeLoading || !newEmail || !currentPassword}
-              >
-                {sendChangeEmailCodeLoading && <Spin className="size-4" />}
-                {sendSuccess && <Check className="size-4 text-green-500 dark:text-green-400" />}
-                {t('settings.account.changeEmail.getCode')}
-              </Button>
-            </div>
-            <Input
-              className="h-7"
-              id="code"
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-            />
-          </div>
         </div>
         <ErrorComponent className="break-all text-center" error={error} />
         <Button
           className="w-full"
           size={'sm'}
-          onClick={() => changeEmailMutation({ email: newEmail, token, code })}
-          disabled={changeEmailLoading || isSuccess}
+          onClick={() => sendChangeEmailCodeMutation({ email: newEmail, password: currentPassword })}
+          disabled={sendChangeEmailCodeLoading || !newEmail || !currentPassword}
         >
-          {changeEmailLoading && <Spin className="size-4" />}
+          {sendChangeEmailCodeLoading && <Spin className="size-4" />}
           {t('actions.confirm')}
         </Button>
       </DialogContent>
     </Dialog>
+
   );
 }
